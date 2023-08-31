@@ -1,0 +1,39 @@
+<h1>Formulaire</h1>
+
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+  <!-- Titre -->
+  <label for="title">Titre: </label>
+  <input id="title" type="text" formControlName="title" [minLength]="1" [maxLength]="20" required [placeholder]="'Veuillez entrer un titre'">
+  <app-error-min-length-field-form [displayError]="submitted && taskForm.get('title')?.hasError('required')" ></app-error-min-length-field-form>
+
+  <!-- Description -->
+  <label for="description">Description: </label>
+  <textarea id="description" type="text" formControlName="description" [maxLength]="60"></textarea>
+  <app-error-min-length-field-form [displayError]="submitted && taskForm.get('description')?.hasError('required')"></app-error-min-length-field-form>
+
+
+  <!-- Statut -->
+  <label for="state">Statut: </label>
+  <select id="state" formControlName="state">
+    <option value="" disabled selected>Choisissez un état</option>
+    <option *ngFor="let task of states" [value]="task">{{ task }}</option>
+  </select>
+  <app-error-min-length-field-form [displayError]="submitted && taskForm.get('state')?.hasError('required')" ></app-error-min-length-field-form>
+
+  <!-- Date -->
+  <label for="date">Date: </label>
+  <input id="date" type="date" formControlName="date" [maxLength]="10" [minLength]="10">
+  <app-error-min-length-field-form [displayError]="submitted && taskForm.get('date')?.hasError('required')" ></app-error-min-length-field-form>
+
+  <p>Compléter le formulaire pour valider.</p>
+  <button type="submit">Submit</button>
+</form>
+
+<hr>
+
+<p>Valeur formulaire: {{ taskForm.value | json }}</p>
+
+<p>Statut formulaire: {{ taskForm.status }}</p>
+
+<app-delete-task></app-delete-task>

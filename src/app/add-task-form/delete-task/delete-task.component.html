@@ -1,0 +1,9 @@
+<h1>Supprimer une tâche</h1>
+
+<form [formGroup]="deleteForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">Titre de la tâche à supprimer :</label>
+    <input type="text" id="title" formControlName="title" required />
+  </div>
+  <button type="submit">Supprimer</button>
+</form>
